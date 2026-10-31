@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PKI Trust Chain Validation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">CNS MINI PROJECT</div>
+    <h1>PKI Trust Chain Validation</h1>
+    <p>Verify a three-level certificate chain from an end user to a trusted Root CA.</p>
+    <div class="chain" aria-label="Certificate chain">
+      <div class="node"><span>01</span><strong>Root CA</strong><small>Trust anchor</small></div>
+      <div class="arrow">→</div>
+      <div class="node"><span>02</span><strong>Intermediate CA</strong><small>Issuer</small></div>
+      <div class="arrow">→</div>
+      <div class="node"><span>03</span><strong>End User</strong><small>Certificate being checked</small></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="panel-heading">
+        <div><div class="eyebrow">VALIDATION</div><h2>Check certificate chain</h2></div>
+        <span class="pill">RSA · SHA-256</span>
+      </div>
+      <p class="muted">The backend checks issuer names, digital signatures, validity dates, CA constraints, and the configured trusted root.</p>
+      <div class="actions">
+        <button id="validBtn" class="primary">Validate genuine chain</button>
+        <button id="fakeBtn" class="secondary">Test fake certificate</button>
+      </div>
+      <div id="summary" class="summary empty" aria-live="polite">Choose a test above to see the validation result.</div>
+      <div id="checks" class="checks"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading"><div><div class="eyebrow">CERTIFICATES</div><h2>Chain details</h2></div></div>
+      <div id="certificates" class="certificates"><p class="muted">Run validation to load certificate details.</p></div>
+    </section>
+
+    <section class="note">
+      <strong>Project note</strong>
+      <p>This is an educational simulation. It generates demo certificates locally when validation is run; it is not a production certificate authority or a replacement for a complete RFC 5280 validator.</p>
+    </section>
+  </main>
+  <footer>Computer Network Security · PKI Demonstration</footer>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
